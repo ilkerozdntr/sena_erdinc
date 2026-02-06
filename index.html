@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Sevgilime 🤍</title>
+
+<style>
+body {
+  background-color: #fdf2f8;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-align: center;
+  padding: 60px;
+  overflow-x: hidden;
+}
+
+/* 🤍 KALP YAĞMURU */
+.heart-rain {
+  position: fixed;
+  top: -10px;
+  color: #ff4d6d;
+  animation: fall linear forwards;
+  z-index: 0;
+  opacity: 0.8;
+}
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+/* GİZLE */
+#icerik { display: none; position: relative; z-index: 2; }
+
+/* ŞİFRE */
+#sifreEkrani {
+  max-width: 400px;
+  margin: 120px auto;
+  position: relative;
+  z-index: 2;
+}
+
+input {
+  padding: 12px;
+  width: 80%;
+  font-size: 18px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+button {
+  background-color: #d6336c;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+button:hover { background-color: #c2255c; }
+
+h1 { color: #d6336c; font-size: 42px; }
+
+p {
+  font-size: 20px;
+  color: #495057;
+  max-width: 650px;
+  margin: 20px auto;
+  line-height: 1.7;
+}
+
+/* ❤️ KALP */
+.heart {
+  font-size: 60px;
+  animation: beat 1s infinite;
+}
+@keyframes beat { 50% { transform: scale(1.2); } }
+
+/* 📸 FOTO KALP */
+.kalp {
+  width: 260px;
+  height: 260px;
+  margin: 30px auto;
+  cursor: pointer;
+}
+.kalp img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: path("M130 235 L20 125 A55 55 0 0 1 130 65 A55 55 0 0 1 240 125 Z");
+  transition: opacity 0.3s ease;
+}
+
+/* ⏱️ SAYAÇ */
+.sayac {
+  font-size: 22px;
+  color: #d6336c;
+  font-weight: bold;
+}
+
+/* ✨ AÇILIŞ */
+.fade {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1.5s ease forwards;
+}
+.delay1 { animation-delay: .3s; }
+.delay2 { animation-delay: .6s; }
+.delay3 { animation-delay: .9s; }
+.delay4 { animation-delay: 1.2s; }
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 💌 MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(255,240,246,.95);
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:40px;
+}
+
+/* 🎀 HELLO KITTY */
+.kitty {
+  position: fixed;
+  width: 90px;
+  z-index: 1;
+  pointer-events: none;
+  display: none;
+}
+.kitty.sol-ust { top: 10px; left: 10px; }
+.kitty.sag-ust { top: 10px; right: 10px; }
+.kitty.sol-alt { bottom: 10px; left: 10px; }
+.kitty.sag-alt { bottom: 10px; right: 10px; }
+
+@media (max-width: 600px) {
+  .kitty { width: 65px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎀 HELLO KITTY -->
+<img src="kitty1.png" class="kitty sol-ust" id="k1">
+<img src="kitty2.png" class="kitty sag-ust" id="k2">
+<img src="kitty3.png" class="kitty sol-alt" id="k3">
+<img src="kitty4.png" class="kitty sag-alt" id="k4">
+
+<audio id="bgMusic" loop>
+  <source src="muzik.mp3" type="audio/mpeg">
+</audio>
+
+<div id="sifreEkrani">
+  <h1>🤍</h1>
+  <p>Bu site sadece sana özel</p>
+  <input type="password" id="sifre" placeholder="Şifreyi gir">
+  <br>
+  <button onclick="kontrol()">Giriş</button>
+</div>
+
+<div id="icerik">
+  <h1 class="fade delay1">Canımdan Çok Sevdiğim Senam 🤍</h1>
+  <div class="heart fade delay2">❤️</div>
+
+  <div class="kalp fade delay2" onclick="fotoDegistir()">
+    <img id="galeri" src="foto1.jpg">
+  </div>
+
+  <div class="sayac fade delay3" id="gunSayaci"></div>
+
+  <p class="fade delay4">
+    Bu siteyi sana kendi ellerimle yaptım.<br>
+    Seni düşündükçe kalbim yumuşuyor.
+  </p>
+
+  <button class="fade delay4" onclick="finalAc()">Son bir şey… 🤍</button>
+  <button class="fade delay4" onclick="mektupAc()" style="background:#ff85c0;">Mektubum ✉️</button>
+</div>
+
+<!-- 💌 FİNAL -->
+<div id="final" class="modal">
+  <h1>Seni çok seviyorum Sena 🤍</h1>
+  <p>Bu Playlisti Bizim İçin Hazırladım https://open.spotify.com/playlist/0V89qvbPwSgNWZIYaoya1u?si=RCCSoKhZQRed1-fYxoQC9A&pi=WBm34EulRn-mX .</p>
+  <button onclick="finalKapat()">Kapat</button>
+</div>
+
+<!-- ✉️ MEKTUP -->
+<div id="mektup" class="modal">
+  <h1>Mektubum 🤍</h1>
+  <p>
+    Biricik sevgilim, sen bunu okurken ben seni tepkini meraklı bir şekilde bekliyorum.
+    Seninle tanıştıktan sonra anladım ki bazı insanlar hayata sanki hep oradaymış gibi giriyor.
+    Gülüşünle içim ferahlıyor, sesini duyduğumda günüm aydınlanıyor.
+  </p>
+  <p>
+    Bazen sadece sessizce seni düşünmek bile yetiyor bana.
+    Çünkü biliyorum, aynı gökyüzüne bakıyoruz, aynı hayalleri kuruyoruz.
+  </p>
+  <p>
+    Şunu bilmeni istiyorum sevgilim; kalbim hep sana ait olacak.
+    İyi ki benimlesin… iyi ki <b>biz</b> olmuşuz 🤍
+  </p>
+  <button onclick="mektupKapat()">Kapat</button>
+</div>
+
+<script>
+/* 🤍 KALP YAĞMURU */
+let kalpInterval;
+function kalpYagmuruBaslat() {
+  kalpInterval = setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart-rain";
+    heart.innerText = "🤍";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (16 + Math.random()*24) + "px";
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+}
+
+/* FOTO */
+const fotograflar = Array.from({length:30}, (_,i)=>`foto${i+1}.jpg`);
+let index = 0;
+function fotoDegistir() {
+  const img = document.getElementById("galeri");
+  index = (index + 1) % fotograflar.length;
+  img.style.opacity = 0;
+  setTimeout(() => {
+    img.src = fotograflar[index];
+    img.style.opacity = 1;
+  }, 300);
+}
+
+/* GİRİŞ */
+const dogruSifre = "15tane";
+function kontrol() {
+  if (document.getElementById("sifre").value === dogruSifre) {
+    sifreEkrani.style.display = "none";
+    icerik.style.display = "block";
+    gunHesapla();
+
+    k1.style.display = k2.style.display =
+    k3.style.display = k4.style.display = "block";
+
+    kalpYagmuruBaslat();
+
+    bgMusic.volume = 0.25;
+    bgMusic.play();
+  } else {
+    alert("Yanlış şifre 🤍");
+  }
+}
+
+function gunHesapla() {
+  const t = new Date(2024,6,7);
+  const b = new Date();
+  gunSayaci.innerText =
+    Math.floor((b - t)/(1000*60*60*24)) + " gündür birlikteyiz 🤍";
+}
+
+function finalAc(){ final.style.display="flex"; }
+function finalKapat(){ final.style.display="none"; }
+function mektupAc(){ mektup.style.display="flex"; }
+function mektupKapat(){ mektup.style.display="none"; }
+</script>
+
+</body>
+</html>
+
